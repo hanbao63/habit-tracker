@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>每日打卡</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: #f2f3f5;
+  color: #1c1c1e;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  width: 100%;
+  max-width: 480px;
+  padding: 28px 20px 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ── Header ── */
+header { margin-bottom: 20px; }
+
+.header-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 2px;
+}
+
+h1 {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.date {
+  font-size: 14px;
+  color: #8e8e93;
+  margin-bottom: 16px;
+  margin-top: 2px;
+}
+
+/* ── Progress ── */
+.progress-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.progress-text {
+  font-size: 15px;
+  font-weight: 500;
+  color: #3a3a3c;
+}
+
+.progress-percent {
+  font-size: 14px;
+  font-weight: 600;
+  color: #34c759;
+  transition: color 0.3s;
+}
+
+.progress-bar {
+  height: 4px;
+  background: #e5e5ea;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #34c759;
+  border-radius: 2px;
+  transition: width 0.4s ease;
+  width: 0%;
+}
+
+/* ── Habit List ── */
+main { flex: 1; }
+
+.habit-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.habit-item {
+  display: flex;
+  align-items: center;
+  padding: 16px 16px;
+  background: #fff;
+  border-radius: 12px;
+  gap: 14px;
+  cursor: pointer;
+  transition: background 0.12s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+}
+
+.habit-item:active { background: #f0f0f0; }
+
+/* ── Checkbox ── */
+.habit-checkbox {
+  width: 24px;
+  height: 24px;
+  border: 2.5px solid #c7c7cc;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.habit-item.completed .habit-checkbox {
+  background: #34c759;
+  border-color: #34c759;
+}
+
+.habit-checkbox .check-icon {
+  color: #fff;
+  font-size: 14px;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.2s;
+  line-height: 1;
+}
+
+.habit-item.completed .habit-checkbox .check-icon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ── Habit Name ── */
+.habit-name {
+  flex: 1;
+  font-size: 16px;
+  font-weight: 450;
+  transition: all 0.2s;
+  min-width: 0;
+  word-break: break-word;
+}
+
+.habit-item.completed .habit-name {
+  color: #aeaeb2;
+  text-decoration: line-through;
+}
+
+/* ── Delete Button ── */
+.habit-delete {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #c7c7cc;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: all 0.12s;
+  flex-shrink: 0;
+  padding: 0;
+  opacity: 0.6;
+}
+
+.habit-item:hover .habit-delete,
+.habit-item:focus-within .habit-delete {
+  opacity: 1;
+}
+
+.habit-delete:hover {
+  color: #ff3b30;
+  background: #fff0ef;
+  opacity: 1;
+}
+
+/* ── Empty State ── */
+.empty-state {
+  text-align: center;
+  padding: 48px 20px;
+  color: #aeaeb2;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ── Add Form ── */
+footer {
+  padding-top: 12px;
+  padding-bottom: 28px;
+  position: sticky;
+  bottom: 0;
+  background: #f2f3f5;
+}
+
+.add-form {
+  display: flex;
+  gap: 8px;
+}
+
+.add-form input {
+  flex: 1;
+  padding: 13px 16px;
+  border: 2px solid #e5e5ea;
+  border-radius: 12px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s;
+  font-family: inherit;
+  background: #fff;
+}
+
+.add-form input:focus {
+  border-color: #007aff;
+}
+
+.add-form input::placeholder {
+  color: #c7c7cc;
+}
+
+.add-form button {
+  width: 50px;
+  height: 50px;
+  border: none;
+  background: #007aff;
+  color: #fff;
+  font-size: 26px;
+  font-weight: 300;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.12s, transform 0.1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+  padding-bottom: 2px;
+}
+
+.add-form button:hover { background: #0062cc; }
+.add-form button:active { transform: scale(0.96); }
+
+/* ── Congratulations Toast ── */
+.toast {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: #1c1c1e;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  opacity: 0;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .container { padding: 20px 16px 0; }
+  h1 { font-size: 24px; }
+  .habit-item { padding: 14px 14px; }
+}
+
+@media (min-width: 768px) {
+  .container { padding: 40px 20px 0; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="header-top">
+      <h1>今日打卡</h1>
+      <span class="progress-percent" id="progressPercent"></span>
+    </div>
+    <p class="date" id="dateDisplay"></p>
+    <div class="progress-summary">
+      <span class="progress-text" id="progressText">已完成 0/0 项</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </header>
+
+  <main>
+    <ul class="habit-list" id="habitList"></ul>
+  </main>
+
+  <footer>
+    <div class="add-form">
+      <input type="text" id="habitInput" placeholder="添加新习惯" maxlength="50" autocomplete="off">
+      <button id="addBtn" title="添加">+</button>
+    </div>
+  </footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function() {
+  const STORAGE_KEY = 'habit-tracker-data';
+  const DEFAULT_HABITS = ['背单词', '学习', '刷题', '听课'];
+
+  const defaultData = {
+    habits: [...DEFAULT_HABITS],
+    records: {}
+  };
+
+  function getToday() {
+    const formatter = new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'Asia/Shanghai',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    });
+    return formatter.format(new Date());
+  }
+
+  function getDisplayDate() {
+    const formatter = new Intl.DateTimeFormat('zh-CN', {
+      timeZone: 'Asia/Shanghai',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      weekday: 'long'
+    });
+    return formatter.format(new Date());
+  }
+
+  function loadData() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return JSON.parse(JSON.stringify(defaultData));
+      const data = JSON.parse(raw);
+      if (!Array.isArray(data.habits)) data.habits = [...DEFAULT_HABITS];
+      if (!data.records || typeof data.records !== 'object') data.records = {};
+      return data;
+    } catch {
+      return JSON.parse(JSON.stringify(defaultData));
+    }
+  }
+
+  function saveData(data) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    } catch {}
+  }
+
+  function getTodayRecords(data, today) {
+    if (!data.records[today]) {
+      data.records[today] = data.habits.map(() => false);
+      saveData(data);
+    }
+    return data.records[today];
+  }
+
+  function escapeHTML(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  let toastTimer = null;
+
+  function showToast(msg) {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove('show'), 1800);
+  }
+
+  function render() {
+    const data = loadData();
+    const today = getToday();
+    const todayRecords = getTodayRecords(data, today);
+
+    // Date
+    document.getElementById('dateDisplay').textContent = getDisplayDate();
+
+    // Stats
+    const completed = todayRecords.filter(Boolean).length;
+    const total = data.habits.length;
+    const pct = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+    document.getElementById('progressText').textContent =
+      total > 0 ? `已完成 ${completed}/${total} 项` : '还没有习惯';
+    document.getElementById('progressFill').style.width = `${pct}%`;
+
+    const pctEl = document.getElementById('progressPercent');
+    if (total > 0) {
+      pctEl.textContent = `${pct}%`;
+      pctEl.style.color = pct === 100 ? '#34c759' : '#8e8e93';
+    } else {
+      pctEl.textContent = '';
+    }
+
+    // List
+    const list = document.getElementById('habitList');
+
+    if (data.habits.length === 0) {
+      list.innerHTML = '<li class="empty-state">还没有习惯<br>在下方添加吧</li>';
+      return;
+    }
+
+    list.innerHTML = data.habits.map((habit, i) => {
+      const done = todayRecords[i] || false;
+      return `<li class="habit-item${done ? ' completed' : ''}" data-index="${i}">
+        <div class="habit-checkbox"><span class="check-icon">✓</span></div>
+        <span class="habit-name">${escapeHTML(habit)}</span>
+        <button class="habit-delete" data-action="delete" title="删除此习惯">✕</button>
+      </li>`;
+    }).join('');
+  }
+
+  function toggleHabit(index) {
+    const data = loadData();
+    const today = getToday();
+    if (!data.records[today]) {
+      data.records[today] = data.habits.map(() => false);
+    }
+    const newVal = !data.records[today][index];
+    data.records[today][index] = newVal;
+    saveData(data);
+    render();
+    if (newVal) {
+      const total = data.habits.length;
+      const completed = data.records[today].filter(Boolean).length;
+      if (completed === total) {
+        showToast('🎉 全部完成！');
+      }
+    }
+  }
+
+  function addHabit(name) {
+    const trimmed = name.trim();
+    if (!trimmed) return;
+
+    // Prevent duplicates check
+    const data = loadData();
+    if (data.habits.some(h => h === trimmed)) {
+      showToast('已存在相同习惯');
+      return;
+    }
+
+    data.habits.push(trimmed);
+    const today = getToday();
+    if (data.records[today]) {
+      data.records[today].push(false);
+    }
+    saveData(data);
+    render();
+    document.getElementById('habitInput').value = '';
+    document.getElementById('habitInput').focus();
+  }
+
+  function deleteHabit(index) {
+    if (!confirm('确定删除这个习惯吗？')) return;
+    const data = loadData();
+    data.habits.splice(index, 1);
+    // Clean up all records
+    Object.keys(data.records).forEach(date => {
+      if (Array.isArray(data.records[date]) && data.records[date].length > index) {
+        data.records[date].splice(index, 1);
+        // Remove empty record entries
+        if (data.records[date].length === 0) {
+          delete data.records[date];
+        }
+      }
+    });
+    saveData(data);
+    render();
+  }
+
+  // ── Event Listeners ──
+
+  // Delegate clicks on the habit list
+  document.getElementById('habitList').addEventListener('click', function(e) {
+    const item = e.target.closest('.habit-item');
+    if (!item) return;
+    const index = parseInt(item.dataset.index);
+
+    if (e.target.closest('.habit-delete')) {
+      deleteHabit(index);
+    } else {
+      toggleHabit(index);
+    }
+  });
+
+  // Add habit
+  document.getElementById('addBtn').addEventListener('click', function() {
+    const input = document.getElementById('habitInput');
+    addHabit(input.value);
+  });
+
+  document.getElementById('habitInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      addHabit(this.value);
+    }
+  });
+
+  // Initial render
+  render();
+})();
+</script>
+
+</body>
+</html>
