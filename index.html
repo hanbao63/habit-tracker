@@ -45,14 +45,7 @@ body {
   margin-bottom: 12px;
 }
 
-.calendar-title {
-  font-size: 17px;
-  font-weight: 600;
-  color: #c4b5fd;
-  letter-spacing: 0.5px;
-}
-
-.calendar-nav button {
+.calendar-nav-btn {
   width: 32px;
   height: 32px;
   border: none;
@@ -60,13 +53,20 @@ body {
   color: #a78bfa;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 18px;
   transition: all 0.15s;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.calendar-nav button:active { background: rgba(124, 58, 237, 0.3); }
+.calendar-nav-btn:active { background: rgba(124, 58, 237, 0.3); }
+
+.calendar-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #c4b5fd;
+  letter-spacing: 0.5px;
+}
 
 .weekday-row {
   display: grid;
@@ -104,7 +104,6 @@ body {
   cursor: pointer;
 }
 .calendar-day:active { background: rgba(124, 58, 237, 0.15); }
-
 .calendar-day .day-num { font-size: 14px; line-height: 1; }
 .calendar-day .day-emoji { font-size: 12px; line-height: 1; }
 
@@ -119,25 +118,18 @@ body {
 }
 
 .calendar-day.completed .day-num { color: #fbbf24; font-weight: 700; }
-
-.calendar-day.completed {
-  background: rgba(251, 191, 36, 0.08);
-}
-
+.calendar-day.completed { background: rgba(251, 191, 36, 0.08); }
 .calendar-day.completed.today {
   background: rgba(251, 191, 36, 0.12);
   box-shadow: inset 0 0 0 2px rgba(251, 191, 36, 0.5);
 }
-
 .calendar-day.viewing {
   background: rgba(124, 58, 237, 0.25);
   box-shadow: inset 0 0 0 2px #7c3aed;
 }
 
 /* ── Today Section ── */
-.today-section {
-  margin-bottom: 6px;
-}
+.today-section { margin-bottom: 6px; }
 
 .today-header {
   display: flex;
@@ -145,25 +137,10 @@ body {
   justify-content: space-between;
   margin-bottom: 4px;
 }
+.today-date { font-size: 14px; color: #8b8ba7; font-weight: 450; }
+.today-date .view-hint { color: #7c3aed; font-weight: 600; }
+.today-status { font-size: 14px; font-weight: 600; color: #a78bfa; }
 
-.today-date {
-  font-size: 14px;
-  color: #8b8ba7;
-  font-weight: 450;
-}
-
-.today-date .view-hint {
-  color: #7c3aed;
-  font-weight: 600;
-}
-
-.today-status {
-  font-size: 14px;
-  font-weight: 600;
-  color: #a78bfa;
-}
-
-/* Streak badge */
 .streak-row {
   display: flex;
   align-items: center;
@@ -197,7 +174,6 @@ body {
 }
 .today-btn:active { background: rgba(124, 58, 237, 0.2); }
 
-/* Progress */
 .progress-bar {
   height: 3px;
   background: rgba(31, 31, 58, 0.8);
@@ -212,19 +188,11 @@ body {
   transition: width 0.5s ease;
   width: 0%;
 }
-.progress-fill.done {
-  background: linear-gradient(90deg, #fbbf24, #f59e0b);
-}
+.progress-fill.done { background: linear-gradient(90deg, #fbbf24, #f59e0b); }
 
 /* ── Habit List ── */
 main { flex: 1; }
-
-.habit-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
+.habit-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
 
 .habit-item {
   display: flex;
@@ -269,10 +237,7 @@ main { flex: 1; }
   100% { transform: scale(1); }
 }
 
-.habit-check .empty-icon {
-  color: rgba(74, 74, 106, 0.7);
-  font-size: 14px;
-}
+.habit-check .empty-icon { color: rgba(74, 74, 106, 0.7); font-size: 14px; }
 .habit-item.completed .habit-check .empty-icon { display: none; }
 
 .habit-name {
@@ -284,10 +249,7 @@ main { flex: 1; }
   word-break: break-word;
   color: #d4d4f5;
 }
-.habit-item.completed .habit-name {
-  color: rgba(107, 107, 138, 0.7);
-  text-decoration: line-through;
-}
+.habit-item.completed .habit-name { color: rgba(107, 107, 138, 0.7); text-decoration: line-through; }
 
 .habit-delete {
   width: 30px;
@@ -316,10 +278,7 @@ footer {
   background: #0d0d1a;
 }
 
-.add-form {
-  display: flex;
-  gap: 8px;
-}
+.add-form { display: flex; gap: 8px; }
 .add-form input {
   flex: 1;
   padding: 14px 16px;
@@ -354,15 +313,9 @@ footer {
 .add-form button:active { transform: scale(0.94); }
 
 /* ── Empty State ── */
-.empty-state {
-  text-align: center;
-  padding: 48px 20px;
-  color: rgba(74, 74, 106, 0.7);
-  font-size: 15px;
-  line-height: 1.6;
-}
+.empty-state { text-align: center; padding: 48px 20px; color: rgba(74, 74, 106, 0.7); font-size: 15px; line-height: 1.6; }
 
-/* ── Celebration Overlay ── */
+/* ── Celebration ── */
 .celebration-overlay {
   position: fixed;
   inset: 0;
@@ -376,10 +329,7 @@ footer {
 }
 .celebration-overlay.show { display: flex; }
 
-@keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
 
 .celebration-content {
   text-align: center;
@@ -393,12 +343,7 @@ footer {
   100% { transform: scale(1); opacity: 1; }
 }
 
-.celebration-sunflower {
-  font-size: 72px;
-  display: block;
-  margin-bottom: 10px;
-  animation: sunflower-wiggle 2s ease infinite;
-}
+.celebration-sunflower { font-size: 72px; display: block; margin-bottom: 10px; animation: sunflower-wiggle 2s ease infinite; }
 
 @keyframes sunflower-wiggle {
   0%, 100% { transform: rotate(0deg) scale(1); }
@@ -406,37 +351,13 @@ footer {
   75% { transform: rotate(-8deg) scale(1.08); }
 }
 
-.celebration-title {
-  font-size: 34px;
-  font-weight: 700;
-  color: #fbbf24;
-  margin-bottom: 6px;
-}
-
-.celebration-streak {
-  font-size: 20px;
-  color: #a78bfa;
-  margin-top: 10px;
-  font-weight: 600;
-}
-
+.celebration-title { font-size: 34px; font-weight: 700; color: #fbbf24; margin-bottom: 6px; }
+.celebration-streak { font-size: 20px; color: #a78bfa; margin-top: 10px; font-weight: 600; }
 .celebration-streak span { color: #fbbf24; }
+.celebration-date { font-size: 15px; color: rgba(139, 139, 167, 0.7); margin-top: 4px; }
 
-.celebration-date {
-  font-size: 15px;
-  color: rgba(139, 139, 167, 0.7);
-  margin-top: 4px;
-}
+#confettiCanvas { position: fixed; inset: 0; pointer-events: none; z-index: 101; }
 
-/* ── Confetti ── */
-#confettiCanvas {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 101;
-}
-
-/* ── Toast ── */
 .toast {
   position: fixed;
   bottom: 90px;
@@ -458,7 +379,6 @@ footer {
 }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* ── Responsive ── */
 @media (max-width: 400px) {
   .container { padding: 14px 10px 0; }
   .calendar-section { padding: 12px; }
@@ -473,11 +393,9 @@ footer {
   <!-- Calendar -->
   <div class="calendar-section">
     <div class="calendar-header">
+      <button class="calendar-nav-btn" id="prevMonth">‹</button>
       <span class="calendar-title" id="calendarTitle">2026年6月</span>
-      <div class="calendar-nav">
-        <button id="prevMonth">‹</button>
-        <button id="nextMonth">›</button>
-      </div>
+      <button class="calendar-nav-btn" id="nextMonth">›</button>
     </div>
     <div class="weekday-row">
       <span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span>
@@ -534,32 +452,35 @@ footer {
   const STREAK_MILESTONES = [7, 30, 50, 63, 88];
 
   const defaultData = {
-    habits: [...DEFAULT_HABITS],
+    habits: DEFAULT_HABITS.map((name) => ({ id: genId(), name, createdAt: getToday() })),
     records: {},
     _shownMilestones: []
   };
 
-  // ── Date utils ──
+  // ── Utilities ──
+  function genId() {
+    return Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 6);
+  }
+
   function getToday() {
     return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
   }
 
   function getTomorrow() {
-    const d = new Date();
-    d.setDate(d.getDate() + 1);
+    const d = new Date(); d.setDate(d.getDate() + 1);
     return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit' }).format(d);
   }
 
   function formatDisplayDate(dateStr) {
     const parts = dateStr.split('-');
-    const d = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
-    const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
-    return `${parseInt(parts[1])}月${parseInt(parts[2])}日 · ${weekdays[d.getDay()]}`;
+    const d = new Date(+parts[0], +parts[1] - 1, +parts[2]);
+    const wds = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
+    return `${+parts[1]}月${+parts[2]}日 · ${wds[d.getDay()]}`;
   }
 
   function formatChineseDate(dateStr) {
     const parts = dateStr.split('-');
-    return `${parseInt(parts[1])}月${parseInt(parts[2])}日`;
+    return `${+parts[1]}月${+parts[2]}日`;
   }
 
   function getDaysInMonth(year, month) { return new Date(year, month, 0).getDate(); }
@@ -570,18 +491,102 @@ footer {
   }
 
   function dateBefore(dateStr) {
-    const d = new Date(parseInt(dateStr.split('-')[0]), parseInt(dateStr.split('-')[1]) - 1, parseInt(dateStr.split('-')[2]));
+    const d = new Date(+dateStr.split('-')[0], +dateStr.split('-')[1] - 1, +dateStr.split('-')[2]);
     d.setDate(d.getDate() - 1);
     return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit' }).format(d);
   }
 
-  // ── Streak ──
+  function dateAfter(dateStr) {
+    const d = new Date(+dateStr.split('-')[0], +dateStr.split('-')[1] - 1, +dateStr.split('-')[2]);
+    d.setDate(d.getDate() + 1);
+    return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit' }).format(d);
+  }
+
+  function makeDefaultHabits() {
+    return DEFAULT_HABITS.map((name) => ({ id: genId(), name, createdAt: getToday() }));
+  }
+
+  // ── Data migration ──
+  function migrateData(data) {
+    let changed = false;
+
+    // Old format: habits = ['背单词', ...]
+    if (data.habits.length > 0 && typeof data.habits[0] === 'string') {
+      console.log('Migrating habits from string[] to object[]');
+      const today = getToday();
+      data.habits = data.habits.map((name) => ({ id: genId(), name, createdAt: today }));
+      changed = true;
+    }
+
+    // Old format: records = { 'date': [true, false, ...] }
+    for (const [date, val] of Object.entries(data.records)) {
+      if (Array.isArray(val)) {
+        console.log('Migrating records for', date);
+        const obj = {};
+        val.forEach((done, idx) => {
+          if (idx < data.habits.length) {
+            obj[data.habits[idx].id] = done;
+          }
+        });
+        data.records[date] = obj;
+        changed = true;
+      }
+    }
+
+    return changed;
+  }
+
+  // ── Data ──
+  function loadData() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) {
+        const data = JSON.parse(JSON.stringify(defaultData));
+        saveData(data);
+        return data;
+      }
+      const data = JSON.parse(raw);
+      if (!Array.isArray(data.habits)) data.habits = makeDefaultHabits();
+      if (!data.records || typeof data.records !== 'object') data.records = {};
+      if (!Array.isArray(data._shownMilestones)) data._shownMilestones = [];
+
+      if (migrateData(data)) saveData(data);
+      return data;
+    } catch {
+      return JSON.parse(JSON.stringify(defaultData));
+    }
+  }
+
+  function saveData(data) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch {}
+  }
+
+  function getDateRecords(data, dateStr) {
+    if (!data.records[dateStr] || typeof data.records[dateStr] !== 'object') {
+      data.records[dateStr] = {};
+      saveData(data);
+    }
+    return data.records[dateStr];
+  }
+
+  function isDayComplete(data, dateStr) {
+    const recs = data.records[dateStr];
+    if (!recs || typeof recs !== 'object') return false;
+    // Check if all habits that existed on that date are completed
+    const habitsAtDate = data.habits.filter(h => h.createdAt <= dateStr && (!h.deletedAt || h.deletedAt > dateStr));
+    if (habitsAtDate.length === 0) return false;
+    return habitsAtDate.every(h => recs[h.id] === true);
+  }
+
   function calculateStreak(data) {
     let streak = 0;
     let cur = getToday();
     while (true) {
       const recs = data.records[cur];
-      if (!recs || recs.length === 0 || !recs.every(Boolean)) break;
+      const habitsAtDate = data.habits.filter(h => h.createdAt <= cur && (!h.deletedAt || h.deletedAt > cur));
+      if (!recs || habitsAtDate.length === 0) break;
+      const allDone = habitsAtDate.every(h => recs[h.id] === true);
+      if (!allDone) break;
       streak++;
       cur = dateBefore(cur);
     }
@@ -594,50 +599,11 @@ footer {
     return null;
   }
 
-  // ── Data ──
-  function loadData() {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return JSON.parse(JSON.stringify(defaultData));
-      const data = JSON.parse(raw);
-      if (!Array.isArray(data.habits)) data.habits = [...DEFAULT_HABITS];
-      if (!data.records || typeof data.records !== 'object') data.records = {};
-      if (!Array.isArray(data._shownMilestones)) data._shownMilestones = [];
-      return data;
-    } catch {
-      return JSON.parse(JSON.stringify(defaultData));
-    }
-  }
-
-  function saveData(data) {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch {}
-  }
-
-  function getDateRecords(data, dateStr) {
-    if (!data.records[dateStr]) {
-      data.records[dateStr] = data.habits.map(() => false);
-      saveData(data);
-    }
-    return data.records[dateStr];
-  }
-
-  function isDayComplete(data, dateStr) {
-    const recs = data.records[dateStr];
-    if (!recs || recs.length === 0) return false;
-    return recs.every(Boolean);
-  }
-
-  function escapeHTML(str) {
-    const div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
-  }
-
   // ── State ──
   let currentMonth = new Date();
-  let currentViewDate = null; // not persisted, overrides _viewDate for manual nav
+  let currentViewDate = null;
 
-  function getEffectiveViewDate(data) {
+  function getViewDate(data) {
     return currentViewDate || data._viewDate || getToday();
   }
 
@@ -649,37 +615,24 @@ footer {
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-
-    const colors = ['#fbbf24', '#eab308', '#a78bfa', '#7c3aed', '#f59e0b', '#d4d4f5', '#f97316', '#34d399'];
+    const colors = ['#fbbf24','#eab308','#a78bfa','#7c3aed','#f59e0b','#d4d4f5','#f97316','#34d399'];
     const particles = Array.from({ length: 150 }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height - canvas.height,
-      w: 5 + Math.random() * 7,
-      h: 3 + Math.random() * 5,
+      x: Math.random() * canvas.width, y: Math.random() * canvas.height - canvas.height,
+      w: 5 + Math.random() * 7, h: 3 + Math.random() * 5,
       color: colors[Math.floor(Math.random() * colors.length)],
-      vy: 2 + Math.random() * 3.5,
-      vx: (Math.random() - 0.5) * 1.8,
-      rot: Math.random() * 360,
-      rotSpeed: (Math.random() - 0.5) * 8,
+      vy: 2 + Math.random() * 3.5, vx: (Math.random() - 0.5) * 1.8,
+      rot: Math.random() * 360, rotSpeed: (Math.random() - 0.5) * 8,
       opacity: 0.7 + Math.random() * 0.3
     }));
-
     function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       let alive = false;
       for (const p of particles) {
-        p.y += p.vy;
-        p.x += p.vx;
-        p.rot += p.rotSpeed;
+        p.y += p.vy; p.x += p.vx; p.rot += p.rotSpeed;
         if (p.y < canvas.height + 20) {
-          alive = true;
-          ctx.save();
-          ctx.translate(p.x, p.y);
-          ctx.rotate(p.rot * Math.PI / 180);
-          ctx.globalAlpha = p.opacity;
-          ctx.fillStyle = p.color;
-          ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
-          ctx.restore();
+          alive = true; ctx.save(); ctx.translate(p.x, p.y);
+          ctx.rotate(p.rot * Math.PI / 180); ctx.globalAlpha = p.opacity;
+          ctx.fillStyle = p.color; ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h); ctx.restore();
         }
       }
       if (alive) confettiAnimId = requestAnimationFrame(animate);
@@ -690,8 +643,7 @@ footer {
   function stopConfetti() {
     if (confettiAnimId) { cancelAnimationFrame(confettiAnimId); confettiAnimId = null; }
     const canvas = document.getElementById('confettiCanvas');
-    const ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
   }
 
   // ── Celebration ──
@@ -700,10 +652,8 @@ footer {
   function showCelebration(dateStr, streak) {
     const overlay = document.getElementById('celebrationOverlay');
     document.getElementById('celebrationDate').textContent = formatChineseDate(dateStr);
-
     const streakEl = document.getElementById('celebStreak');
     const titleEl = document.getElementById('celebTitle');
-
     const milestone = isStreakMilestone(streak);
     if (milestone) {
       streakEl.textContent = `🎉 连续打卡 ${milestone} 天！太棒了！`;
@@ -715,17 +665,14 @@ footer {
       streakEl.textContent = '';
       titleEl.textContent = '全部完成！';
     }
-
     overlay.classList.add('show');
     startConfetti();
-
     clearTimeout(celebrationTimer);
     celebrationTimer = setTimeout(() => {
       overlay.classList.remove('show');
       stopConfetti();
-      // Auto-advance
-      const d = loadData();
       if (!currentViewDate) {
+        const d = loadData();
         d._viewDate = getTomorrow();
         saveData(d);
         render();
@@ -743,12 +690,18 @@ footer {
     toastTimer = setTimeout(() => el.classList.remove('show'), 1800);
   }
 
+  function escapeHTML(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
   // ── Render Calendar ──
   function renderCalendar(data) {
     const year = currentMonth.getFullYear();
     const month = currentMonth.getMonth() + 1;
     const today = getToday();
-    const viewDate = getEffectiveViewDate(data);
+    const viewDate = getViewDate(data);
 
     document.getElementById('calendarTitle').textContent = `${year}年${month}月`;
 
@@ -758,137 +711,114 @@ footer {
 
     let html = '';
 
-    // Previous month
     for (let i = startOffset - 1; i >= 0; i--) {
       const day = prevMonthDays - i;
       const m = month === 1 ? 12 : month - 1;
       const y = month === 1 ? year - 1 : year;
-      const dateStr = `${y}-${String(m).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-      const complete = isDayComplete(data, dateStr);
-      html += `<div class="calendar-day other-month${complete ? ' completed' : ''}" data-date="${dateStr}">`;
-      html += `<span class="day-num">${day}</span>`;
-      if (complete) html += `<span class="day-emoji">🌻</span>`;
-      html += `</div>`;
+      const dateStr = `${y}-${String(m).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+      html += `<div class="calendar-day other-month${isDayComplete(data,dateStr)?' completed':''}" data-date="${dateStr}"><span class="day-num">${day}</span>${isDayComplete(data,dateStr)?'<span class="day-emoji">🌻</span>':''}</div>`;
     }
 
-    // Current month
     for (let day = 1; day <= daysInMonth; day++) {
-      const dateStr = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+      const dateStr = `${year}-${String(month).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
       const isToday = dateStr === today;
       const complete = isDayComplete(data, dateStr);
       const isViewing = dateStr === viewDate;
-
       let cls = 'calendar-day';
       if (isToday) cls += ' today';
       if (complete) cls += ' completed';
       if (isViewing && !isToday) cls += ' viewing';
-
-      html += `<div class="${cls}" data-date="${dateStr}">`;
-      html += `<span class="day-num">${day}</span>`;
-      if (complete) html += `<span class="day-emoji">🌻</span>`;
-      html += `</div>`;
+      html += `<div class="${cls}" data-date="${dateStr}"><span class="day-num">${day}</span>${complete?'<span class="day-emoji">🌻</span>':''}</div>`;
     }
 
-    // Next month
     const totalCells = startOffset + daysInMonth;
     const remaining = (7 - (totalCells % 7)) % 7;
     for (let day = 1; day <= remaining; day++) {
       const m = month === 12 ? 1 : month + 1;
       const y = month === 12 ? year + 1 : year;
-      const dateStr = `${y}-${String(m).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-      const complete = isDayComplete(data, dateStr);
-      html += `<div class="calendar-day other-month${complete ? ' completed' : ''}" data-date="${dateStr}">`;
-      html += `<span class="day-num">${day}</span>`;
-      if (complete) html += `<span class="day-emoji">🌻</span>`;
-      html += `</div>`;
+      const dateStr = `${y}-${String(m).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+      html += `<div class="calendar-day other-month${isDayComplete(data,dateStr)?' completed':''}" data-date="${dateStr}"><span class="day-num">${day}</span>${isDayComplete(data,dateStr)?'<span class="day-emoji">🌻</span>':''}</div>`;
     }
 
     document.getElementById('calendarGrid').innerHTML = html;
   }
 
-  // ── Render ──
+  // ── Main Render ──
   function render() {
     const data = loadData();
     const today = getToday();
-    const viewDate = getEffectiveViewDate(data);
-    const isViewingToday = viewDate === today;
-    const dateRecords = getDateRecords(data, viewDate);
+    const viewDate = getViewDate(data);
+    const isToday = viewDate === today;
+    const recs = getDateRecords(data, viewDate);
+
+    // Get habits that existed on viewDate
+    const habitsAtDate = data.habits.filter(h => h.createdAt <= viewDate && (!h.deletedAt || h.deletedAt > viewDate));
 
     // Date
-    const dateEl = document.getElementById('todayDate');
-    if (isViewingToday) {
-      dateEl.innerHTML = formatDisplayDate(today);
-    } else {
-      dateEl.innerHTML = `${formatDisplayDate(viewDate)} <span class="view-hint">· 查看中</span>`;
-    }
+    document.getElementById('todayDate').innerHTML = isToday
+      ? formatDisplayDate(today)
+      : `${formatDisplayDate(viewDate)} <span class="view-hint">· 查看中</span>`;
 
-    // "回到今天" button
-    const todayBtn = document.getElementById('todayBtn');
-    todayBtn.style.display = isViewingToday ? 'none' : 'inline-block';
+    document.getElementById('todayBtn').style.display = isToday ? 'none' : 'inline-block';
 
     // Stats
-    const completed = dateRecords.filter(Boolean).length;
-    const total = data.habits.length;
+    const completed = habitsAtDate.filter(h => recs[h.id] === true).length;
+    const total = habitsAtDate.length;
     const pct = total > 0 ? Math.round((completed / total) * 100) : 0;
 
-    document.getElementById('todayStatus').textContent = total > 0 ? `已完成 ${completed}/${total}` : '0/0';
-
+    document.getElementById('todayStatus').textContent = total > 0 ? `${completed}/${total}` : '0/0';
     const fill = document.getElementById('progressFill');
     fill.style.width = `${pct}%`;
     fill.className = 'progress-fill' + (pct === 100 && total > 0 ? ' done' : '');
 
     // Streak
-    const streak = calculateStreak(data);
-    document.getElementById('streakBadge').textContent = `🔥 连续 ${streak} 天`;
+    document.getElementById('streakBadge').textContent = `🔥 连续 ${calculateStreak(data)} 天`;
 
     // Calendar
     renderCalendar(data);
 
-    // Celebration check (only for today)
-    const wasAllDone = isViewingToday && data.habits.length > 0 && completed === total;
-    if (wasAllDone && !data._celebratedToday) {
+    // Celebration (today only)
+    if (isToday && total > 0 && completed === total && !data._celebratedToday) {
       data._celebratedToday = true;
       saveData(data);
-      showCelebration(today, streak);
+      showCelebration(today, calculateStreak(data));
     }
-    if (!wasAllDone && data._celebratedToday) {
+    if (isToday && total > 0 && completed < total && data._celebratedToday) {
       data._celebratedToday = false;
       saveData(data);
     }
 
-    // List
+    // Habit list
     const list = document.getElementById('habitList');
-    if (data.habits.length === 0) {
+    if (habitsAtDate.length === 0) {
       list.innerHTML = '<li class="empty-state">还没有习惯<br>在下方添加吧</li>';
       return;
     }
 
-    list.innerHTML = data.habits.map((habit, i) => {
-      const done = dateRecords[i] || false;
-      return `<li class="habit-item${done ? ' completed' : ''}" data-index="${i}">
-        <div class="habit-check">${done ? '🌻' : '<span class="empty-icon">○</span>'}</div>
-        <span class="habit-name">${escapeHTML(habit)}</span>
+    list.innerHTML = habitsAtDate.map((h) => {
+      const done = recs[h.id] === true;
+      return `<li class="habit-item${done?' completed':''}" data-id="${h.id}">
+        <div class="habit-check">${done?'🌻':'<span class="empty-icon">○</span>'}</div>
+        <span class="habit-name">${escapeHTML(h.name)}</span>
         <button class="habit-delete" data-action="delete" title="删除此习惯">✕</button>
       </li>`;
     }).join('');
   }
 
   // ── Actions ──
+
   function getTargetDate() {
     const data = loadData();
     return currentViewDate || data._viewDate || getToday();
   }
 
-  function toggleHabit(index) {
+  function toggleHabit(habitId) {
     const data = loadData();
     const target = getTargetDate();
-    if (!data.records[target]) data.records[target] = data.habits.map(() => false);
-    data.records[target][index] = !data.records[target][index];
+    if (!data.records[target] || typeof data.records[target] !== 'object') data.records[target] = {};
+    data.records[target][habitId] = !data.records[target][habitId];
     data._celebratedToday = false;
-    // If toggling today, clear advance
-    if (target === getToday()) {
-      delete data._viewDate;
-    }
+    if (target === getToday()) delete data._viewDate;
     saveData(data);
     render();
   }
@@ -897,11 +827,15 @@ footer {
     const trimmed = name.trim();
     if (!trimmed) return;
     const data = loadData();
-    if (data.habits.some(h => h === trimmed)) { showToast('已存在相同习惯'); return; }
-    data.habits.push(trimmed);
-    // Add to existing record dates
+    if (data.habits.some(h => h.name === trimmed)) { showToast('已存在相同习惯'); return; }
+    const today = getToday();
+    data.habits.push({ id: genId(), name: trimmed, createdAt: today });
+    // Only add to today's and future records
     Object.keys(data.records).forEach(date => {
-      data.records[date].push(false);
+      if (date >= today) {
+        // future dates that already exist: do nothing, new habit defaults to unchecked
+        // (getDateRecords will return undefined for this id, which renders as unchecked)
+      }
     });
     saveData(data);
     render();
@@ -909,14 +843,19 @@ footer {
     document.getElementById('habitInput').focus();
   }
 
-  function deleteHabit(index) {
+  function deleteHabit(habitId) {
     if (!confirm('确定删除这个习惯吗？')) return;
     const data = loadData();
-    data.habits.splice(index, 1);
+    const habit = data.habits.find(h => h.id === habitId);
+    if (!habit) return;
+    // Only mark as deleted for future dates, keep past records intact
+    habit.deletedAt = getToday();
+    const today = getToday();
+    // Remove from today's record display (keep past records)
     Object.keys(data.records).forEach(date => {
-      if (Array.isArray(data.records[date]) && data.records[date].length > index) {
-        data.records[date].splice(index, 1);
-        if (data.records[date].length === 0) delete data.records[date];
+      if (date >= today) {
+        delete data.records[date][habitId];
+        if (Object.keys(data.records[date]).length === 0) delete data.records[date];
       }
     });
     saveData(data);
@@ -925,24 +864,20 @@ footer {
 
   function goToDate(dateStr) {
     currentViewDate = dateStr;
-    // Navigate calendar to the month containing this date
     const parts = dateStr.split('-');
-    currentMonth = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, 1);
+    currentMonth = new Date(+parts[0], +parts[1] - 1, 1);
     render();
   }
 
   // ── Events ──
-
-  // Habit list clicks
   document.getElementById('habitList').addEventListener('click', function(e) {
     const item = e.target.closest('.habit-item');
     if (!item) return;
-    const index = parseInt(item.dataset.index);
-    if (e.target.closest('.habit-delete')) { deleteHabit(index); }
-    else { toggleHabit(index); }
+    const id = item.dataset.id;
+    if (e.target.closest('.habit-delete')) { deleteHabit(id); }
+    else { toggleHabit(id); }
   });
 
-  // Add habit
   document.getElementById('addBtn').addEventListener('click', function() {
     addHabit(document.getElementById('habitInput').value);
   });
@@ -950,7 +885,6 @@ footer {
     if (e.key === 'Enter') { e.preventDefault(); addHabit(this.value); }
   });
 
-  // Calendar nav
   document.getElementById('prevMonth').addEventListener('click', function() {
     currentMonth.setMonth(currentMonth.getMonth() - 1);
     renderCalendar(loadData());
@@ -960,7 +894,6 @@ footer {
     renderCalendar(loadData());
   });
 
-  // Calendar day click - use delegation
   document.getElementById('calendarGrid').addEventListener('click', function(e) {
     const dayEl = e.target.closest('.calendar-day');
     if (!dayEl || dayEl.classList.contains('other-month')) return;
@@ -968,7 +901,6 @@ footer {
     if (dateStr) goToDate(dateStr);
   });
 
-  // Today button
   document.getElementById('todayBtn').addEventListener('click', function() {
     currentViewDate = null;
     const data = loadData();
@@ -976,17 +908,16 @@ footer {
     saveData(data);
     const today = getToday();
     const parts = today.split('-');
-    currentMonth = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, 1);
+    currentMonth = new Date(+parts[0], +parts[1] - 1, 1);
     render();
   });
 
-  // Celebration overlay click to dismiss
   document.getElementById('celebrationOverlay').addEventListener('click', function() {
     this.classList.remove('show');
     stopConfetti();
     clearTimeout(celebrationTimer);
-    const d = loadData();
     if (!currentViewDate) {
+      const d = loadData();
       d._viewDate = getTomorrow();
       saveData(d);
       render();
@@ -996,7 +927,6 @@ footer {
   // ── Init ──
   const initData = loadData();
   const today = getToday();
-  // Clear viewDate if it's in the past and not today
   if (initData._viewDate && initData._viewDate < today) {
     delete initData._viewDate;
     saveData(initData);
